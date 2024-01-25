@@ -1,1 +1,51 @@
-<p>form works!</p>
+<section class="container">
+  <div class="header">
+    <h1>Add city details about the communication status</h1>
+  </div>
+  <div>
+    <form [formGroup]="cityDetails" (ngSubmit)="onSubmit()" class="form">
+      <mat-form-field appearance="outline" class="matForm">
+        <mat-label>City Name</mat-label>
+        <mat-select formControlName="cityName">
+          <mat-option *ngFor="let city of allCitiesData" [value]=city.code>
+            {{city.name}}
+        </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="matForm">
+        <mat-label>Temperature</mat-label>
+        <input type="number" id="temperature" formControlName="temperature" required matInput/>
+      </mat-form-field>
+      
+      <div class="rainingStatus">
+        <label for="rainingStatus" class="statusLabel">Is Raining in your city?</label>
+        <mat-radio-group formControlName="rainingStatus">
+          <mat-radio-button value=true>Yes</mat-radio-button>
+          <mat-radio-button value=false>No</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <mat-form-field appearance="outline" class="matForm">
+        <mat-label>Date</mat-label>
+        <input matInput [matDatepicker]="picker1" [formControl]="date" />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker1"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="matForm">
+        <mat-label>Network Power</mat-label>
+        <input type="number" id="networkPower" formControlName="networkPower" required matInput />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="matForm">
+        <mat-label>Altitude</mat-label>
+        <input type="number" id="altitude" formControlName="altitude" required matInput/>
+
+      </mat-form-field>
+      
+      <button mat-raised-button color="primary" type="submit" [disabled]="cityDetails.invalid" class="submitButton">Submit</button>
+    </form>
+  </div>
+</section>

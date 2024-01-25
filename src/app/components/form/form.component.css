@@ -1,0 +1,34 @@
+.container {
+  margin: 10px;
+}
+
+.header {
+  margin: 20px;
+  display: flex;
+ justify-content: center;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.matForm{
+  width: 300px;
+}
+
+.rainingStatus{
+  margin-bottom: 20px;
+  width: 300px;
+}
+
+.statusLabel {
+  font-size: 18px;
+ font-weight: 500;
+  display: flex;
+  flex-direction: column;
+}
+
+.submitButton {
+  width: 200px;
+}
