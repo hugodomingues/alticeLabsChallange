@@ -6,7 +6,7 @@
     <form [formGroup]="cityDetails" (ngSubmit)="onSubmit()" class="form">
       <mat-form-field appearance="outline" class="matForm">
         <mat-label>City Name</mat-label>
-        <mat-select formControlName="cityName">
+        <mat-select formControlName="cityName" required>
           <mat-option *ngFor="let city of allCitiesData" [value]=city.code>
             {{city.name}}
         </mat-option>
@@ -21,8 +21,8 @@
       <div class="rainingStatus">
         <label for="rainingStatus" class="statusLabel">Is Raining in your city?</label>
         <mat-radio-group formControlName="rainingStatus">
-          <mat-radio-button value=true>Yes</mat-radio-button>
-          <mat-radio-button value=false>No</mat-radio-button>
+          <mat-radio-button [value]="true" color="primary">Yes</mat-radio-button>
+          <mat-radio-button [value]="false" color="primary">No</mat-radio-button>
         </mat-radio-group>
       </div>
 
@@ -37,9 +37,10 @@
       </mat-form-field>
       <mat-form-field appearance="outline" class="matForm">
         <mat-label>Network Power</mat-label>
-        <input type="number" id="networkPower" formControlName="networkPower" required matInput />
+        <input type="number" id="networkPower" formControlName="networkPower" required matInput min="1" max="5" />
+        <mat-hint align="end">Enter a number between 1 and 5</mat-hint>
       </mat-form-field>
-      <mat-form-field appearance="outline" class="matForm">
+      <mat-form-field appearance="outline" class="matForm" style="margin-top: 10px;">
         <mat-label>Altitude</mat-label>
         <input type="number" id="altitude" formControlName="altitude" required matInput/>
 

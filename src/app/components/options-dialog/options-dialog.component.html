@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>{{data.language === 'EN' ? 'Change the language and the timezone' : 'Alterar o idioma e o fuso horário'}}</h1>
+<div mat-dialog-content class="content">
+ <mat-form-field appearance="outline" style="margin-top: 5px">
+  <mat-label for="timezone">{{data.language === 'EN' ? 'Select Timezone:' : 'Escolha o fuso horário:'}}</mat-label>
+  <mat-select id="timezone" [(ngModel)]="data.timezone" >
+    <mat-option *ngFor="let timezone of timezones" [value]="timezone">{{ timezone }}</mat-option>
+  </mat-select>
+ </mat-form-field>
+ <mat-form-field appearance="outline">
+  <mat-label for="language">{{data.language === 'EN' ?'Select Language': 'Seleciona a Lingua'}}</mat-label>
+  <mat-select id="language" [(ngModel)]="data.language" >
+    <mat-option *ngFor="let language of languageOptions" [value]="language">{{ language }}</mat-option>
+  </mat-select>
+ </mat-form-field>
+  
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">{{data.language === 'EN' ?'Cancel' : 'Cancelar'}}</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>{{ data.language === 'EN' ?'Apply': 'Aplicar'}}</button>
+</div>

@@ -1,1 +1,47 @@
-<p>city-details works!</p>
+<section class="container">
+  <div class="header">
+    <div>
+      <button mat-icon-button [routerLink]="['/']" routerLinkActive="router-link-active"  color="primary">
+        <mat-icon
+          aria-hidden="false"
+          aria-label="Arrow back"
+          fontIcon="arrow_back_ios"
+        ></mat-icon>
+      </button>
+    </div>
+    <div>
+      <h2>
+        {{language === 'EN' ? ' Communication Status of ' + convertToName(city.cityName) : 'Estado das comunicações em ' + convertToName(city.cityName) }}
+      
+      </h2>
+     
+    </div>
+    <div>
+      <button mat-icon-button  (click)="openDialog()">
+        <mat-icon
+          aria-hidden="false"
+          aria-label="Arrow back"
+          fontIcon="settings"
+        ></mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="content">
+    <h2>
+      {{language === 'EN' ? 'For the city'  + convertToName(city.cityName) + '  we have ' + city.values.length + 'status reported by our users' : 'Para a cidade de ' + convertToName(city.cityName) + ' temos ' + city.values.length + 'registos adicionados pelos nossos utilizadores'}}
+     </h2>
+    <div>
+      <h3>{{language === 'EN' ? 'Average temperature:' : 'Temperatura média:'}} {{averageTemp()}}ºC</h3>
+      <h3>{{language === 'EN' ? 'Average Network power:' : 'Potência média da rede:'}} {{averageNP()}}</h3>
+      <h3>{{language === 'EN' ? 'Worst day on ' : 'Pior dia em '}}{{convertToName(city.cityName)}}{{language === 'EN' ? ' to use communications ' : ' para usar as comunicações' }}  {{checkTheData()}} </h3>
+    </div>
+    <div class="chartsDiv">
+      <div class="chart">
+        <canvasjs-chart  [options]="chartOptionsRainingDays" [styles]="{width: '100%', height:'360px'}" (chartInstance)="getChartInstance($event)"></canvasjs-chart> 
+      </div>
+      <div class="chart">
+        <canvasjs-chart [options]="chartOptionsDays" [styles]="{width: '100%', height:'360px'}" (chartInstance)="getChartInstance($event)"></canvasjs-chart> 
+      </div>
+    </div>
+  </div>
+</section>

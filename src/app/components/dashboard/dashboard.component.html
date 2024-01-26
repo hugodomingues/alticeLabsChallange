@@ -1,9 +1,35 @@
 <section class="dashboard">
   <div class="header">
-    <h3>Weather Conditions on the Cities around the world</h3>
+    <h1>Weather Conditions on the Cities around the world</h1>
   </div>
-  <div *ngIf="cities.length !== 0; else elseBlock">Display all cities</div>
+  <div *ngIf="cities.length !== 0; else elseBlock" class="contentList">
+    <mat-card class="card" *ngFor="let city of cities">
+      <mat-card-header>
+        <mat-card-title>{{convertToName(city.cityName)}}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image src="../../../assets/backgroundImg.png" alt="Photo of a city">
+      <mat-card-content>
+        <h3>
+          Average Temperature {{averageTemp(city)}}ºC
+        </h3>
+        <h3>Average Network Power {{averageNP(city)}} </h3>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button [routerLink]="['/details', city._id]">DETAILS</button>
+      </mat-card-actions>
+    </mat-card>
+    
+  </div>
   <ng-template #elseBlock
-    >Content to render when condition is false.</ng-template
+    class="noDataDiv">
+   
+      <h2>No data available</h2>
+      <div class="addBtn">
+        <span>If you want to add your communication status please add here</span>
+        <button mat-raised-button color="primary" class="addButton" routerLink="/add-city">Add Status</button>
+
+      </div>
+    
+    </ng-template
   >
 </section>

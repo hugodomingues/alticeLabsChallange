@@ -9,15 +9,26 @@ export class CitiesServiceService {
   constructor() {}
 
   instance = axios.create({
-    baseURL: 'https://crudcrud.com/api/1e021346a6a248b38c7cc1e34768bc87',
+    baseURL: '/api/076402a85eab459a937a0dcc1d10bcd3',
+    headers: {
+      'Content-Type': 'application/json',
+    },
   });
 
-  async getAllCities() {
+  async getAllCities(): Promise<City[]> {
     const cities = await this.instance.get('/cities');
     return cities.data ?? [];
   }
 
   async addNewCity(city: City) {
     await this.instance.post('/cities', city);
+  }
+
+  async getCityDetails(id: string) {
+    const city = await this.instance.get(`/cities/${id}`);
+    return city.data ?? {};
+  }
+  async updateCity(id: string, city: City) {
+    await this.instance.put(`/cities/${id}`, city);
   }
 }

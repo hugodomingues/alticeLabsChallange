@@ -80,3 +80,47 @@ export const allCities = [
     code: 'PT-07',
   },
 ];
+
+//this is just a test var
+export const citiesAddOnAPI = [
+  {
+    _id: '65b25eff658e2403e8762770',
+    cityName: 'PT-01',
+    values: [
+      {
+        temperature: 15,
+        rainingStatus: false,
+        networkPower: 5,
+        altitude: 5,
+        date: '2024-01-25T13:15:28.325Z',
+      },
+      {
+        temperature: 7,
+        rainingStatus: true,
+        networkPower: 4,
+        altitude: 4,
+        date: '2024-01-25T23:16:56.573Z',
+      },
+      {
+        temperature: 10,
+        rainingStatus: true,
+        networkPower: 4,
+        altitude: 4,
+        date: '2024-01-25T23:23:21.929Z',
+      },
+    ],
+  },
+  {
+    _id: '65b2ea2a658e2403e87628f0',
+    cityName: 'PT-03',
+    values: [
+      {
+        temperature: 1,
+        rainingStatus: true,
+        networkPower: 3,
+        altitude: 3,
+        date: '2024-01-25T23:08:55.654Z',
+      },
+    ],
+  },
+];

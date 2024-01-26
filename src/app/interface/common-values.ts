@@ -5,3 +5,8 @@ export interface CommonValues {
   networkPower: number;
   altitude: number;
 }
+
+export interface DialogData {
+  language: string;
+  timezone: string;
+}

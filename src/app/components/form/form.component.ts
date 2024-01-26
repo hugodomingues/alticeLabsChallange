@@ -17,6 +17,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { allCities } from './../../interface/allCities';
 import { CitiesServiceService } from '../../services/cities-service.service';
 import { City } from './../../interface/city';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -39,6 +40,7 @@ import { City } from './../../interface/city';
 export class FormComponent {
   allCitiesData = allCities;
   citiesService: CitiesServiceService = inject(CitiesServiceService);
+  router: Router = new Router();
 
   date = new FormControl(new Date());
   cityDetails = new FormGroup({
@@ -50,20 +52,53 @@ export class FormComponent {
     altitude: new FormControl(0),
   });
 
-  onSubmit() {
-    const dataToSubmit: City = {
-      cityName: this.cityDetails.controls.cityName.value ?? '',
-      values: [
-        {
-          temperature: this.cityDetails.controls.temperature.value ?? 0,
-          rainingStatus: this.cityDetails.controls.rainingStatus.value ?? false,
-          networkPower: this.cityDetails.controls.networkPower.value ?? 1,
-          altitude: this.cityDetails.controls.networkPower.value ?? 0,
-          date: this.date.value ?? new Date(),
-        },
-      ],
-    };
-    console.log(dataToSubmit);
-    this.citiesService.addNewCity(dataToSubmit);
+  async onSubmit() {
+    //first check if we already have data on the city selected
+    const cities = await this.citiesService.getAllCities();
+    if (
+      cities &&
+      cities.find(
+        (city) => city.cityName === this.cityDetails.controls.cityName.value
+      )
+    ) {
+      const cityToUpdate = cities.find(
+        (city) => city.cityName === this.cityDetails.controls.cityName.value
+      );
+      if (cityToUpdate) {
+        const newObject = {
+          cityName: cityToUpdate.cityName,
+          values: [
+            ...cityToUpdate.values,
+            {
+              temperature: this.cityDetails.controls.temperature.value ?? 0,
+              rainingStatus:
+                this.cityDetails.controls.rainingStatus.value ?? false,
+              networkPower: this.cityDetails.controls.networkPower.value ?? 1,
+              altitude: this.cityDetails.controls.networkPower.value ?? 0,
+              date: this.date.value ?? new Date(),
+            },
+          ],
+        };
+        this.citiesService.updateCity(cityToUpdate._id ?? '', newObject);
+      }
+    } else {
+      const dataToSubmit: City = {
+        cityName: this.cityDetails.controls.cityName.value ?? '',
+        values: [
+          {
+            temperature: this.cityDetails.controls.temperature.value ?? 0,
+            rainingStatus:
+              this.cityDetails.controls.rainingStatus.value ?? false,
+            networkPower: this.cityDetails.controls.networkPower.value ?? 1,
+            altitude: this.cityDetails.controls.networkPower.value ?? 0,
+            date: this.date.value ?? new Date(),
+          },
+        ],
+      };
+
+      this.citiesService.addNewCity(dataToSubmit);
+    }
+    this.cityDetails.reset();
+    this.router.navigateByUrl('/');
   }
 }
