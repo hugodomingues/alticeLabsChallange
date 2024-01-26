@@ -9,7 +9,7 @@ export class CitiesServiceService {
   constructor() {}
 
   instance = axios.create({
-    baseURL: '/api/076402a85eab459a937a0dcc1d10bcd3',
+    baseURL: 'https://crudcrud.com/api/076402a85eab459a937a0dcc1d10bcd3',
     headers: {
       'Content-Type': 'application/json',
     },
